@@ -6,17 +6,14 @@ Return the maximum amount of water a container can store.
 
 Notice that you may not slant the container."""
 
-def maxArea(heights):
-    score = 0
-    imin = 0
-    imax=len(heights)-1
-    while imin<=imax :
-        score = max(score,min(heights[imin],heights[imax])*(imax-imin))
-        imin+=1
-        score = max(score,min(heights[imin],heights[imax])*(imax-imin)) #check all combinations
-        imax-=1
-    print(score)
-    
-if __name__ == "__main__":
-    maxArea([1,8,6,2,5,4,8,3,7])
-    maxArea([1,1])    
+class Solution:
+    def maxArea(self, height):
+        i, j = 0, len(height) - 1
+        water = 0
+        while i < j:
+            water = max(water, (j - i) * min(height[i], height[j]))
+            if height[i] < height[j]:
+                i += 1
+            else:
+                j -= 1
+        return water 
