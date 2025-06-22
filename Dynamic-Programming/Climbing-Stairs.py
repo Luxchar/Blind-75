@@ -2,12 +2,20 @@
 
 Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?"""
 
-def climbStairs(n: int):
-    if n == 1:
-        return 1
-    if n == 2:
-        return 2
-    return climbStairs(n-1) + climbStairs(n-2)
-
-print(climbStairs(3))
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        memo = {}
+        
+        def helper(n):
+            if n in memo:
+                return memo[n]
+            if n == 1:
+                return 1
+            if n == 2:
+                return 2
+            
+            memo[n] = helper(n-1) + helper(n-2)
+            return memo[n]
+        
+        return helper(n)
 
