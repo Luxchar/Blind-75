@@ -1,13 +1,17 @@
-# set min price var and max_price
-# go through array and store min price if min_price < current
-# for each day check if current - min_prices is > max_prices
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        left, right = 0, 1
+        max_profit = 0
 
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        buy, profit = prices[0], 0
-        for i in range(len(prices)):
-            if prices[i] < buy:
-                buy = prices[i]
-            elif prices[i] - buy > profit:
-                profit = prices[i] - buy
-        return profit
+        while right < len(prices):
+            buy = prices[left]
+            sell = prices[right]
+            max_profit = max(sell-buy, max_profit)
+            if buy > prices[left+1]:
+                left += 1
+            right += 1
+        return max_profit
